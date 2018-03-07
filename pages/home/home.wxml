@@ -1,0 +1,35 @@
+<!-- 引入商品模版-->
+<import src="../tpls/products/products-tpl.wxml" />
+<view class="container">
+  <!--横幅轮播图-->
+  <view class="item-swiper">
+    <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{bannerData}}" wx:key="id">
+        <swiper-item bindtap="onProductTap" data-id="{{item.id}}" >
+          <image src="{{item.url}}" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!--横幅轮播图-->
+  <view class="item-tab">
+    <wxc-tab bind:tabchange="onClick" default-index="{{activeKey}}" component-id="tab1" animate="true" class="tab" active-text-color="#ffffff" line-color="#ffffff" active-line-color="#AB956D">
+      <view slot="tablabel">
+        <wxc-tab-label wx:for="{{tabs}}" wx:for-item="tab" wx:key="{{tab.title}}" tab-index="{{index}}" component-id="tab1">
+          <view class="label">
+            <icon type="success" size="16" color="{{ activeKey === index ? '#AB956D' : '#555' }}">
+            </icon>
+            <view class="text {{ activeKey === index ? 'active' : ''}}">
+              {{tab.title}}
+            </view>
+          </view>
+        </wxc-tab-label>
+      </view>
+
+      <wxc-tab-panel wx:for="{{tabs}}" wx:for-item="tab" wx:key="{{tab.content}}" tab-index="{{index}}" component-id="tab1">
+        <template is="products" data="{{productsData:hotProductsData}}"></template>
+      </wxc-tab-panel>
+    </wxc-tab>
+  </view>
+
+</view>
