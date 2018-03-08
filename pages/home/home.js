@@ -56,11 +56,10 @@ Page({
     })
   },
   onProductTap: function (event) {
-    console.log(event)
     let id = home.getDataSet(event,'id')
-    console.log(id)
+    let name = home.getDataSet(event, 'name')
     wx.navigateTo({
-      url: '../product/product?id=' + id
+      url: '../product/product?id=' + id + '&name=' + name
     })
   },
   /**

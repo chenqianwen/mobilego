@@ -2,6 +2,8 @@
   "pages":[
     "pages/home/home",
     "pages/product/product",
+    "pages/category/category",
+    "pages/cart/cart",
     "pages/logs/logs"
   ],
   "window":{
@@ -22,13 +24,13 @@
         "selectedIconPath": "images/tabBar/home_selected.png"
       },
       {
-        "pagePath": "pages/home/home",
+        "pagePath": "pages/category/category",
         "text": "分类",
         "iconPath": "images/tabBar/category.png",
         "selectedIconPath": "images/tabBar/category_selected.png"
       },
       {
-        "pagePath": "pages/home/home",
+        "pagePath": "pages/cart/cart",
         "text": "购物车",
         "iconPath": "images/tabBar/cart.png",
         "selectedIconPath": "images/tabBar/cart_selected.png"

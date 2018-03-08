@@ -5,7 +5,7 @@
   <view class="item-swiper">
     <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
       <block wx:for="{{bannerData}}" wx:key="id">
-        <swiper-item bindtap="onProductTap" data-id="{{item.id}}" >
+        <swiper-item bindtap="onProductTap" data-id="{{item.id}}" data-name="{{item.name}}">
           <image src="{{item.url}}" class="slide-image" />
         </swiper-item>
       </block>

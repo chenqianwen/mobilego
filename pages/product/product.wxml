@@ -1,4 +1,29 @@
 <view class="container">
-  <view>商品详情</view>
-  <view></view>
+  <!-- 图片 -->
+  <view class="product-header">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="swiper">
+      <block wx:for="{{productData}}" wx:key="id">
+        <swiper-item bindtap="onProductTap" data-id="{{item.id}}" data-name="{{item.name}}">
+          <image src="{{item.url}}" mode="scaleToFill"/>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!-- 详情 -->
+  <view>
+    以下的商品介绍
+  </view>
+  <!-- 底部 -->
+  <view class="footer-box">        
+        <view class="contact">
+          <contact-button style="opacity:0;position:absolute;" type="default-dark"  session-from="weapp" size="27"></contact-button>
+          <view style='position:absolute;bottom:10rpx;'> 客服 </view>
+        </view>
+        <view class="shop-cart-btn" bindtap="goShopCar">
+            <view class="shop-num">({{shopNum}})</view>
+            <view style='position:absolute;bottom:10rpx;'> 购物车 </view>
+        </view>
+        <view class="join-shop-cart" bindtap="addToCart">加入购物车</view>
+        <view class="now-buy" bindtap="tobuy">立即购买</view>
+   </view>
 </view>

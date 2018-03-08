@@ -8,9 +8,9 @@ class Product extends Base {
   /**
    * 获取商品详情
    */
-  getProductDetails(callback) {
+  getProductDetail(id, callback) {
     var params = {
-      url: '/product/detail',
+      url: '/product/detail/'+id,
       sCallback: function (data) {
         callback && callback(data);
       }
