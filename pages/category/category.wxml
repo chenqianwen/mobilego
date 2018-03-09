@@ -1,0 +1,23 @@
+<!-- 引入模版-->
+<import src="../tpls/category/category-tpl.wxml" />
+<view class="container category-container">
+  <!-- <view class="search">
+   xxxxxxx
+  </view> -->
+  <view class="category-box">
+    <view class="left-box">
+      <scroll-view data-id='21' scroll-y style="height: 100%;width:100%" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-top="0" enable-back-to-top>
+        <block wx:for="{{categoryData}}" wx:key="{{item.id}}">
+          <view class="menu-item {{categorySelectedIndex==item.index?'selected':''}}" bindtap='switchCategory' data-id='{{item.id}}' data-index='{{item.index}}'> {{item.name}} </view>
+        </block>
+      </scroll-view>
+    </view>
+    <view class="right-box">
+      <scroll-view data-id='2' scroll-y style="height: 100%;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-top="0">
+        <view class="foods-type-box">
+          <template is="categorydetail" data="{{categoryDetailData:categoryProductsData}}" />
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>
