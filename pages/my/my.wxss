@@ -1,0 +1,45 @@
+.my-header {
+  width: 100%;
+}
+
+.my-header-panel {
+  background-color: #ff4040;
+  border-radius: 20rpx;
+  border: 2px solid;
+  color: #fff;
+  display: flex;
+  padding: 30rpx;
+  margin: 20rpx;
+}
+
+.my-header image {
+  height: 140rpx;
+  width: 140rpx;
+  border-radius: 100rpx;
+  align-items: center;
+}
+
+.my-header .my-header-panel text {
+  margin-left: 40rpx;
+  font-size: 30rpx;
+  font-family: "黑体";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-body {
+  width: 100%;
+}
+
+.weui-grid__icon {
+  height: 80rpx;
+  width: 80rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.weui-grid__icon image{
+  height: 60rpx;
+  width: 60rpx;
+}

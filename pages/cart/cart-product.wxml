@@ -1,0 +1,61 @@
+<view class="container cart-container">
+  <block wx:if="{{cartData.length>0}}">
+    <view class="top-box">
+      <view class="handle-box" ontap="toEdit" data-edit="{{isEdit}}">
+        <text wx:if="{{isEdit}}">完成</text>
+        <text wx:else>编辑商品</text>
+      </view>
+    </view>
+    <view class="cart-box">
+      <block wx:for="{{cartData}}" wx:key="{{item.id}}">
+        <view class="cart-item {{idToDelete==item.id?'cart-delete-item':''}}" bindtouchstart="touchStart" bindtouchend="touchEnd" data-id='{{item.id}}'>
+          <view class="cart-item-main" data-id="{{item.id}}">
+            <!-- 选择框 -->
+            <view class="cart-item-checkbox" ontap="toggleSelectOne" data-id="{{item.id}}" data-selected="{{item.isSelected}}">
+              <icon wx:if="{{!item.isSelected}}" type="circle" size="23"></icon>
+              <icon wx:else type="success" size="23" color="red" />
+            </view>
+            <!-- 商品图片 -->
+            <view class="cart-item-img" bindtap="onProductsItemTap" data-id="{{item.id}}">
+              <image class="good-image" src="{{item.mainImgUrls[0]}}" mode="scaleToFill"></image>
+            </view>
+            <!-- 商品名称价格数量 -->
+            <view class="cart-item-word">
+              <view class="title-box">
+                <text class="title">{{item.name}}</text>
+              </view>
+              <view class="bottom-box">
+                <text class="price">￥{{item.price}}</text>
+                <view class="cart-item-counts">
+                  <view class="btns {{item.counts==1?'disabled':''}}" bindtap="changeCounts" data-id="{{item.id}}" data-type="cut">-</view>
+                  <view class="btns counts">{{item.counts}}</view>
+                  <view class="btns" bindtap="changeCounts" data-id="{{item.id}}" data-type="add">+</view>
+                </view>
+              </view>
+            </view>
+            <!-- 商品删除按钮 -->
+            <view class="cart-item-delete-btn" hidden="{{idToDelete != item.id}}" data-id='{{item.id}}' ontap="deleteOne">
+              删除
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <!-- 结算底部栏  -->
+    <view class="footer-account-box">
+      <view class="left-price">
+        <view class="all-selected  {{allSelect?'active':''}}" bindtap="toggleSelectAll" data-selected="{{countsTypeSelected == cartData.length?'true':'false'}}">
+          <icon wx:if="{{countsTypeSelected != cartData.length}}" type="circle" size="23"></icon>
+          <icon wx:else type="success" size="23" color="red" /> 全选
+          <text color="red">({{countsSelected}})</text>
+        </view>
+        <view class="total" wx:if="{{!isEdit}}">合计：¥ {{totalPrice}}</view>
+      </view>
+      <view class="to-pay-btn" wx:if="{{isEdit}}" bindtap="deleteSelected">删除</view>
+      <view class="to-pay-btn" wx:else bindtap="submitOrder">去结算</view>
+    </view>
+  </block>
+  <view wx:else class="no-data">
+    您还没有添加任何商品
+  </view>
+</view>

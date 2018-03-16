@@ -1,0 +1,28 @@
+<view class="container my-container" hidden="{{!loadingHidden}}">
+  <view class="my-header">
+    <view class="my-header-panel">
+      <image src="{{userInfo.avatarUrl}}"></image>
+      <text class="name">用户名:{{userInfo.nickName}}</text>
+    </view>
+  </view>
+  <view class="my-body">
+    <view class="weui-grids">
+      <block wx:for="{{gridData}}" wx:key="{{index}}">
+        <view class="weui-grid" data-status='{{item.status}}' bindtap="onTapGrid">
+          <view class="weui-grid__icon">
+            <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+              <image src="{{item.imgUrl}}" mode="scaleToFill" />
+              <view wx-if="{{item.counts}}" class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">{{item.counts}}</view>
+            </view>
+          </view>
+          <p class="weui-grid__label">
+            {{item.name}}
+          </p>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+<loading hidden="{{loadingHidden}}">
+  加载中...
+</loading>

@@ -1,0 +1,52 @@
+<view class="container order-container">
+  <!-- 带付款订单栏 -->
+  <view class="order-top" wx-if="{{orderBaseInfo}}">
+   <view class="order-top-item">
+    <text class="key">订单状态：</text>
+    <text class="{{orderStatus == 1?'val':''}}">{{orderStatus == '1'?'待付款':'已付款'}}</text>
+
+   </view>
+   <view class="order-top-item">
+    <text class="key">订单编号：</text>
+    <text>{{orderBaseInfo.orderNo}}</text>
+   </view>
+   <view class="order-top-item">
+    <text class="key">下单时间：</text>
+    <text>{{orderBaseInfo.createdDate}}</text>
+   </view>
+  </view>
+  <!-- 订单详情 -->
+  <view class="order-box">
+    <block wx:for="{{products}}" wx:key="{{item.id}}">
+      <view class="order-item">
+        <view class="order-item-main" data-id="{{item.id}}">
+          <!-- 商品图片 -->
+          <view class="order-item-img" bindtap="onProductsItemTap" data-id="{{item.id}}">
+            <image class="good-image" src="{{item.mainImgUrls[0]}}" mode="scaleToFill"></image>
+          </view>
+          <!-- 商品名称价格数量 -->
+          <view class="order-item-word">
+            <view class="title-box">
+              <text class="title">{{item.name}}</text>
+            </view>
+            <view class="bottom-box">
+              <text class="price">￥{{item.price}}</text>
+              <text class="counts">X{{item.counts}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <!-- 支付底部栏  -->
+  <view class="footer-account-box">
+    <view class="price-detail">
+      <view class="actual-word">实付金额：</view>
+      <text class="actual-price">￥{{totalPrice}}</text>
+    </view>
+    <view class="pay" wx:if="{{orderStatus<=1}}">
+      <button type="primary" loading="{{loading}}" bindtap="pay"> 微信支付</button>
+    </view>
+
+  </view>
+</view>
