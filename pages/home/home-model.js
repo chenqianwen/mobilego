@@ -10,7 +10,7 @@ class Home extends Base{
    */
   getBanner (callback) {
     var params = {
-      url: '/banner',
+      url: '/product/banner',
       sCallback: function (data) {
         callback && callback(data);
       }
@@ -18,11 +18,11 @@ class Home extends Base{
     this.request(params)
   }
   /**
-   * 获取热门商品信息
+   * 获取主题商品信息
    */
-  getHotProducts(callback) {
+  getTheme(callback) {
     var params = {
-      url: '/products/hot',
+      url: '/product/theme',
       sCallback: function (data) {
         callback && callback(data);
       }

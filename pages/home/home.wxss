@@ -21,6 +21,18 @@
   width: 100%;
   text-align: center;
 }
+/** tab下划线颜色 */
+.weui-navbar__slider {
+  background-color: #AB956D;
+}
+/** 选中的tab颜色 */
+.weui-navbar__item .weui-bar__item_on{
+  color: #AB956D;
+}
+.weui-tab__content{
+  margin-top: 10rpx;
+}
+
 
 .item-tab .tab .label {
   width: 100%;

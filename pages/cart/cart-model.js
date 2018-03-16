@@ -7,6 +7,12 @@ class Cart extends Base {
     this.storageCartKey = 'cart';
   }
   /**
+   * 保存/更新缓存数据
+   */
+  saveStorageSync(cartData) {
+    wx.setStorageSync(this.storageCartKey, cartData);
+  }
+  /**
    * 加入购物车：
    * 该商品不存在：增添一条数据，数量为填写的counts
    * 该商品存在：该商品的数量+counts
@@ -14,7 +20,6 @@ class Cart extends Base {
   add(product, counts) {
     let cartData = this.getCartDataFromLocal()
     let thatOneInfo = this.isHasThatOne(product.id, cartData)
-    console.log(thatOneInfo)
     // 如果不存在：：
     if (thatOneInfo.index == -1) {
       product.counts = counts;
@@ -29,16 +34,32 @@ class Cart extends Base {
   }
   /**
    * 从缓存中获取购物车数据
+   * flag:
+   *  true: 获取选择的商品数据
+   *  false: 获取所有的商品数据
    */
-  getCartDataFromLocal() {
+  getCartDataFromLocal(flag) {
     let res = wx.getStorageSync(this.storageCartKey);
     if (!res) {
       res = [];
     }
+    if (flag) {
+      let resSelected = []
+      for (let i = 0; i < res.length; i++) {
+          if(res[i].isSelected){
+            resSelected.push(res[i]);
+          }
+      }
+      res = resSelected
+    }
     return res;
   }
   /**
-   * 获取购物车商品总数量
+   * 获取购物车商品总数量和商品类别属性数量
+   * {
+   *  counts: 0,
+   *  countsType: 0
+   * }
    * flag: 
    *  true获取选中的商品数量
    *  flase获取全部的商品数量
@@ -46,16 +67,22 @@ class Cart extends Base {
   getCartTotalCounts(flag) {
     let cartData = this.getCartDataFromLocal();
     let counts = 0;
+    let countsType = 0;
     for (let i = 0; i < cartData.length; i++) {
       if (flag) {
-        if (cartData[i].isSelected){
+        if (cartData[i].isSelected) {
           counts += cartData[i].counts;
+          countsType++;
         }
       } else {
         counts += cartData[i].counts;
-      }    
+        countsType++;
+      }
     }
-    return counts;
+    return {
+      counts: counts,
+      countsType: countsType
+    };
   }
   /**
    * 购物车数据中是否存在该商品，并返回商品数据和商品在购物车中的序号

@@ -5,15 +5,20 @@ var cart = new Cart();
 
 Page({
   data: {
-    // 横幅图数据
+    loadingHidden: false,
+    // 商品数据
     productData: {
       id: '1',
       name: '优乐美',
+      description: '优乐美 香醇奶茶，红豆味儿，2018新款上市。冲水即可，方便美味。',
       price: 0.9,
       mainImgUrls: [
         'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'
       ],
-      detailImgUrl: []
+      detailImgUrl: [
+        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'
+      ]
     },
     // 轮播图是否显示点
     indicatorDots: true,
@@ -28,9 +33,10 @@ Page({
     cartTotalCounts: 0,
   },
   onLoad: function (options) {
+    console.log(options)
     this.data.id = options.id
     this.data.titleName = options.name
-    this.loadData()
+    this._loadData()
   },
   /**
    * 页面渲染完成
@@ -43,13 +49,24 @@ Page({
   /**
    * 加载数据
    */
-  loadData: function () {
+  _loadData: function (callback) {
     // 获取商品详情信息，显示购物车商品总数量
     product.getProductDetail(this.data.id, (data) => {
       this.setData({
         productData: data,
-        cartTotalCounts: cart.getCartTotalCounts(false)
+        cartTotalCounts: cart.getCartTotalCounts(false).counts,
+        loadingHidden: true
       })
+      callback && callback();
+    })
+  },
+  /**
+   * 点击主图
+   */
+  onImageTap: function (event) {
+    wx.previewImage({
+      // 需要预览的图片http链接列表
+      urls: this.data.productData.mainImgUrls
     })
   },
   /**
@@ -68,5 +85,29 @@ Page({
     this.setData({
       cartTotalCounts: totalCounts
     });
-  }
+    wx.showToast({
+      title: '加入购物车成功',
+      icon: 'success',
+      duration: 2000
+    })
+  },
+  /**
+   * 查看购物车
+   */
+  onCartTap: function (event) {
+    console.log(1);
+    wx.navigateTo({
+      url: '/pages/cart/cart-product'
+    })
+  },
+  /*下拉刷新页面*/
+  onPullDownRefresh: function () {
+    //在标题栏中显示加载
+    wx.showNavigationBarLoading() 
+    this._loadData(() => {
+       //完成停止加载
+      wx.hideNavigationBarLoading()
+      wx.stopPullDownRefresh()
+    });
+  },
 })

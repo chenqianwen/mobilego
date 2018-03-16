@@ -203,13 +203,16 @@ Page({
       })
     })
   },
-  upper: function (e) {
-    console.log(e)
+  /**
+   * 点击商品
+   */
+  onProductTap: function (event) {
+    let id = category.getDataSet(event, 'id')
+    let name = category.getDataSet(event, 'name')
+    console.log(event)
+    wx.navigateTo({
+      url: '../product/product?id=' + id + '&name=' + name
+    })
   },
-  lower: function (e) {
-    console.log(e)
-  },
-  scroll: function (e) {
-    console.log(e)
-  }
+  
 })

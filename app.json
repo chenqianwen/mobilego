@@ -4,13 +4,19 @@
     "pages/product/product",
     "pages/category/category",
     "pages/cart/cart",
+    "pages/cart/cart-product",
+    "pages/order/order",
+    "pages/pay-result/pay-result",
+    "pages/my/my",
+    "pages/order-list/order-list",
     "pages/logs/logs"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#AB956D",
     "navigationBarTitleText": "",
-    "navigationBarTextStyle":"#FFFFFF"
+    "navigationBarTextStyle":"#FFFFFF",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#a9b7b7",
@@ -36,7 +42,7 @@
         "selectedIconPath": "images/tabBar/cart_selected.png"
       },
       {
-        "pagePath": "pages/home/home",
+        "pagePath": "pages/my/my",
         "text": "我的",
         "iconPath": "images/tabBar/my.png",
         "selectedIconPath": "images/tabBar/my_selected.png"

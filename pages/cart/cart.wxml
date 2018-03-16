@@ -1,13 +1,19 @@
 <view class="container cart-container">
   <block wx:if="{{cartData.length>0}}">
+    <view class="top-box">
+      <view class="handle-box" ontap="toEdit" data-edit="{{isEdit}}">
+        <text wx:if="{{isEdit}}">完成</text>
+        <text wx:else>编辑商品</text>
+      </view>
+    </view>
     <view class="cart-box">
-      <block wx:for="{{cartData}}">
-        <view class="cart-item">
-          <view class="cart-item-main" data-id="{{item.id}}" data-index="{{index}}">
+      <block wx:for="{{cartData}}" wx:key="{{item.id}}">
+        <view class="cart-item {{idToDelete==item.id?'cart-delete-item':''}}" bindtouchstart="touchStart" bindtouchend="touchEnd" data-id='{{item.id}}'>
+          <view class="cart-item-main" data-id="{{item.id}}">
             <!-- 选择框 -->
-            <view class="cart-item-checkbox" ontap="toggleSelectOne">
-              <image wx:if="{{item.isSelected}}" class="good-image" src='../../images/icon/circleSelected.png' />
-              <image wx:else class="good-image" src='../../images/icon/circle.png' />
+            <view class="cart-item-checkbox" ontap="toggleSelectOne" data-id="{{item.id}}" data-selected="{{item.isSelected}}">
+              <icon wx:if="{{!item.isSelected}}" type="circle" size="23"></icon>
+              <icon wx:else type="success" size="23" color="red" />
             </view>
             <!-- 商品图片 -->
             <view class="cart-item-img" bindtap="onProductsItemTap" data-id="{{item.id}}">
@@ -22,40 +28,35 @@
                 <text class="price">￥{{item.price}}</text>
                 <view class="cart-item-counts">
                   <view class="btns {{item.counts==1?'disabled':''}}" bindtap="changeCounts" data-id="{{item.id}}" data-type="cut">-</view>
-                  <view class="btns counts">{{item.counts}}</view>
+                  <view class="btns counts">
+                    <input type="digit" maxlength="3" value="{{item.counts}}" data-id="{{item.id}}" bindblur="blur" bindinput="onInput" />
+                  </view>
                   <view class="btns" bindtap="changeCounts" data-id="{{item.id}}" data-type="add">+</view>
                 </view>
               </view>
+            </view>
+            <!-- 商品删除按钮 -->
+            <view class="cart-item-delete-btn" hidden="{{idToDelete != item.id}}" data-id='{{item.id}}' ontap="deleteOne">
+              删除
             </view>
           </view>
         </view>
       </block>
     </view>
-    <!-- <view class="footer-account-box all-accounts-box">
-      <view class="all-select" ontap="toggleSelectAll" data-status="{{selectedTypeCounts==cartData.length?'true':'false'}}">
-        <image wx:if="{{selectedTypeCounts==cartData.length}}" class="title-icon" src="../../images/icon/circleSelected.png"></image>
-        <image wx:else class="title-icon" src="../../images/icon/circle.png"></image>
-        <text>全选({{selectedCounts}})</text>
+    <!-- 结算底部栏  -->
+    <view class="footer-account-box">
+      <view class="left-price">
+        <view class="all-selected  {{allSelect?'active':''}}" bindtap="toggleSelectAll" data-selected="{{countsTypeSelected == cartData.length?'true':'false'}}">
+          <icon wx:if="{{countsTypeSelected != cartData.length}}" type="circle" size="23"></icon>
+          <icon wx:else type="success" size="23" color="red" /> 全选
+          <text color="red">({{countsSelected}})</text>
+        </view>
+        <view class="total" wx:if="{{!isEdit}}">合计：¥ {{totalPrice}}</view>
       </view>
-      <view class="all-price-submit {{account==0?'disabled':''}}" bindtap="submitOrder">
-        <view class="accounts-btn">下单</view>
-        <view class="price-text">￥{{account}}</view>
-        <view class="sumbit-btn">
-          <text>去结算</text>
-        </view>
-        <view class="arrow-icon">
-          <image wx:if="{{account==0}}" src="../../imgs/icon/arrow@grey.png"></image>
-          <image wx:else src="../../imgs/icon/arrow.png"></image>
-        </view>
-      </view>
-    </view> -->
-    <view class="jiesuan-box">
-        <view class="left-price">
-            <view class="all-selected  {{allSelect?'active':''}}" bindtap="bindAllSelect">全选</view>
-            <view class="total" hidden="{{noSelect}}">合计：¥ {{totalPrice}}</view>
-        </view>
-        <view class="to-pay-btn {{noSelect?'no-select':''}}" hidden="{{!saveHidden}}" bindtap="toPayOrder">去结算</view>
-        <view class="to-pay-btn {{noSelect?'no-select':''}}" hidden="{{saveHidden}}" bindtap="deleteSelected">删除</view>
+      <view class="to-pay-btn" wx:if="{{isEdit && countsTypeSelected!=0}}" bindtap="deleteSelected">删除</view>
+      <view class="to-pay-btn disabled" wx:if="{{isEdit && countsTypeSelected ==0}}">删除</view>
+      <view class="to-pay-btn" wx:if="{{!isEdit && countsTypeSelected!=0}}" bindtap="submitOrder">去结算</view>
+      <view class="to-pay-btn disabled" wx:if="{{!isEdit && countsTypeSelected ==0}}">去结算</view>
     </view>
   </block>
   <view wx:else class="no-data">

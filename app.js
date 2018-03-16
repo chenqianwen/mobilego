@@ -1,6 +1,11 @@
-//app.js
+import {Token} from 'utils/token.js';
+var token = new Token();
+
 App({
   onLaunch: function () {
+
+
+    
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())

@@ -13,7 +13,7 @@
       </scroll-view>
     </view>
     <view class="right-box">
-      <scroll-view data-id='2' scroll-y style="height: 100%;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-top="0">
+      <scroll-view data-id='2' scroll-y style="height: 100%;"  scroll-top="0">
         <view class="foods-type-box">
           <template is="categorydetail" data="{{categoryDetailData:categoryProductsData}}" />
         </view>

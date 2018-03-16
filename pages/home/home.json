@@ -1,9 +1,3 @@
 {
-  "navigationBarTitleText": "车急便",
-  "usingComponents": {
-      "wxc-tab": "../../components/@minui/wxc-tab/dist/index",
-      "wxc-tab-panel": "../../components/@minui/wxc-tab/dist/panel",
-      "wxc-tab-label": "../../components/@minui/wxc-tab/dist/label",
-      "wxc-price": "../../components/@minui/wxc-price/dist/index"
-  }
+  "navigationBarTitleText": "车急便"
 }
