@@ -10,14 +10,14 @@ Page({
     // 横幅图数据
     bannerData: [
       {
-        productId: '1',
-        productName: '优乐美0',
-        productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'
+        id: '1',
+        name: '优乐美0',
+        majorImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'
       },
       {
-        productId: '2',
-        productName: '优乐美0',
-        productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+        id: '2',
+        name: '优乐美0',
+        majorImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
       }
     ],
     // 轮播图是否显示点

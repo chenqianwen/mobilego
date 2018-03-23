@@ -4,9 +4,9 @@
   <!--横幅轮播图-->
   <view class="item-swiper">
     <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{bannerData}}" wx:key="{{item.productId}}">
-        <swiper-item bindtap="onProductTap" data-id="{{item.productId}}" data-name="{{item.productName}}">
-          <image src="{{item.productImgUrl}}" class="slide-image" />
+      <block wx:for="{{bannerData}}" wx:key="{{item.id}}">
+        <swiper-item bindtap="onProductTap" data-id="{{item.id}}" data-name="{{item.name}}">
+          <image src="{{item.majorImgUrl}}" class="slide-image" />
         </swiper-item>
       </block>
     </swiper>

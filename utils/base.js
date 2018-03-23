@@ -1,4 +1,4 @@
-import { Config } from 'config.js';
+    import { Config } from 'config.js';
 import { Token } from 'token.js';
 
 class Base {
@@ -35,8 +35,8 @@ class Base {
         // 异常不要返回到回调中，就在request中处理，记录日志并showToast一个统一的错误即可
         let httpStatus = res.statusCode.toString();
         let startChar = httpStatus.charAt(0);
-        if (startChar == '2') {
-          params.sCallback && params.sCallback(res.data);
+        if (startChar == '2' && res.data.code == 0) {
+          params.sCallback && params.sCallback(res.data.data);
         } else {
           if (httpStatus == '401') {
             if (!noRefetch) {
