@@ -17,7 +17,7 @@
             </view>
             <!-- 商品图片 -->
             <view class="cart-item-img" bindtap="onProductsItemTap" data-id="{{item.id}}">
-              <image class="good-image" src="{{item.mainImgUrls[0]}}" mode="scaleToFill"></image>
+              <image class="good-image" src="{{item.majorImgUrl}}" mode="scaleToFill"></image>
             </view>
             <!-- 商品名称价格数量 -->
             <view class="cart-item-word">

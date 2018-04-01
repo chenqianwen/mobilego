@@ -1,14 +1,14 @@
 <view class="container order-container">
-  <!-- 带付款订单栏 -->
+  <!-- 待付款订单栏 -->
   <view class="order-top" wx-if="{{orderBaseInfo}}">
    <view class="order-top-item">
     <text class="key">订单状态：</text>
-    <text class="{{orderStatus == 1?'val':''}}">{{orderStatus == '1'?'待付款':'已付款'}}</text>
+    <text class="{{orderStatus == 1?'val':''}}">{{orderStatus == 1?'待付款':'已付款'}}</text>
 
    </view>
    <view class="order-top-item">
     <text class="key">订单编号：</text>
-    <text>{{orderBaseInfo.orderNo}}</text>
+    <text>{{orderBaseInfo.orderId}}</text>
    </view>
    <view class="order-top-item">
     <text class="key">下单时间：</text>
@@ -22,7 +22,7 @@
         <view class="order-item-main" data-id="{{item.id}}">
           <!-- 商品图片 -->
           <view class="order-item-img" bindtap="onProductsItemTap" data-id="{{item.id}}">
-            <image class="good-image" src="{{item.mainImgUrls[0]}}" mode="scaleToFill"></image>
+            <image class="good-image" src="{{item.majorImgUrl}}" mode="scaleToFill"></image>
           </view>
           <!-- 商品名称价格数量 -->
           <view class="order-item-word">

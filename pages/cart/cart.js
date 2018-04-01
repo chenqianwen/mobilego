@@ -18,7 +18,7 @@ Page({
         id: 1,
         name: '优乐美',
         price: 9.8,
-        mainImgUrls: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'],
+        majorImgUrl: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
         counts: 1,
         isSelected: true
       },
@@ -26,7 +26,7 @@ Page({
         id: 2,
         name: '香飘飘',
         price: 8.8,
-        mainImgUrls: ['http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'],
+        majorImgUrl: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
         counts: 1,
         isSelected: true
       }

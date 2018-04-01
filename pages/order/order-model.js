@@ -4,9 +4,9 @@ class Order extends Base {
   constructor() {
     super();
     this.storageOrderKey = 'newOrder';
-    this.commonStatus = 0;
-    this.waitingStatus = 1;
-    this.playedStatus = 2;
+    this.orderAll = 0;
+    this.orderWait = 1;
+    this.orderPay = 2;
   }
   /**
    * 保存／更新缓存
@@ -45,16 +45,17 @@ class Order extends Base {
   /*
    * 拉起微信支付
    * params:
-   * orderNumber - {int} 订单id
+   * orderId: 订单id
    * return：
    * callback - {obj} 回调方法 ，返回参数 可能值 
    * 0:商品缺货等原因导致订单不能支付; 
    * 1: 支付失败或者支付取消； 
    * 2:支付成功；
    * */
-  doPay(orderNumber, callback) {
+  doPay(orderId, callback) {
     var params = {
-      url: '/order/pay/' + orderNumber,
+      type: 'POST',
+      url: '/order/pay/' + orderId,
       sCallback: callback
     }
     this.request(params);

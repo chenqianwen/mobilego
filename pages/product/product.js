@@ -12,10 +12,11 @@ Page({
       name: '优乐美',
       description: '优乐美 香醇奶茶，红豆味儿，2018新款上市。冲水即可，方便美味。',
       price: 0.9,
-      mainImgUrls: [
+      majorImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+      minorImgUrls: [
         'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'
       ],
-      detailImgUrl: [
+      detailImgUrls: [
         'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
         'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg'
       ]
@@ -66,7 +67,7 @@ Page({
   onImageTap: function (event) {
     wx.previewImage({
       // 需要预览的图片http链接列表
-      urls: this.data.productData.mainImgUrls
+      urls: this.data.productData.minorImgUrls
     })
   },
   /**
@@ -74,7 +75,7 @@ Page({
    */
   addToCart: function () {
     let tempObj = {};
-    let keys = ['id', 'name', 'mainImgUrls', 'price'];
+    let keys = ['id', 'name', 'majorImgUrl', 'price'];
     for (let key in this.data.productData) {
       if (keys.indexOf(key) >= 0) {
         tempObj[key] = this.data.productData[key];

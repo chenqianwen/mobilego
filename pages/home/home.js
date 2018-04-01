@@ -41,9 +41,8 @@ Page({
     // 主题商品数据
     themeData: [
       {
-        themeId: 1,
-        themeName: '热门畅销',
-        productData: [
+        themeName: '每日推荐', themeId: '1', productList:
+        [
           {
             productId: 1,
             productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
@@ -67,9 +66,7 @@ Page({
         ]
       },
       {
-        themeId: 2,
-        themeName: '每日推荐',
-        productData: [{
+        themeName: '热门畅销', themeId: '2', productList: [{
           productId: 1,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
           productPrice: 2.2
@@ -80,20 +77,20 @@ Page({
           productPrice: 1.9
         }
         ]
-      }
+      },
+      { themeName: '今日折扣', themeId: '3' },
     ]
   },
   /**
    * 监听页面加载
    */
   onLoad: function () {
-    this.loadData()
-
+    this._loadData()
   },
   /**
    * 加载数据
    */
-  loadData: function () {
+  _loadData: function () {
     // 获得bannar信息
     home.getBanner((data) => {
       this.setData({
@@ -102,7 +99,6 @@ Page({
     })
     // 获取主题商品信息
     home.getTheme((data) => {
-      this._renderTab(data.length)
       this.setData({
         themeData: data
       })
@@ -141,18 +137,25 @@ Page({
   callback: function (res) {
     console.log(res)
   },
-  tabClick: function (e) {
+  /**
+   * 点击主题分类
+   */
+  tabClick: function (event) {
+    let id = home.getDataSet(event, 'id')
+    let index = home.getDataSet(event, 'index')
     this.setData({
-      sliderOffset: e.currentTarget.offsetLeft,
-      activeIndex: e.currentTarget.id
+      sliderOffset: event.currentTarget.offsetLeft,
+      activeIndex: index
     });
   },
-  onClick: function (e) {
-    console.log(`ComponentId:${e.detail.componentId},you selected:${e.detail.key}`);
-    const idx = e.detail.key;
-    this.setData({
-      activeKey: idx
-    });
+  /**
+   * 
+   */
+  getProduct: function (id, index) {
+    home.getProductByThemeId(id, index, (data) => {
+      this.data.productData.length
+
+    })
   }
 
 })

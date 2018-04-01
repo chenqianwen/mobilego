@@ -51,7 +51,7 @@ class My extends Base {
    */
   getOrderListCount(callback) {
     let params = {
-      url: '/order/list/count',
+      url: '/order/wait/count',
       sCallback: callback
     }
     this.request(params);

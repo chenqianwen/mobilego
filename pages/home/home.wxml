@@ -15,16 +15,16 @@
   <view class="item-tab">
     <view class="weui-tab">
       <view class="weui-navbar">
-        <block wx:for="{{themeData}}" wx:key="{{item.themeId}}">
-          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+        <block wx:for="{{themeData}}" wx:key="index">
+          <view data-id="{{item.id}}" data-index="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
             <view class="weui-navbar__title">{{item.themeName}}</view>
           </view>
         </block>
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
-        <view wx:for="{{themeData}}" wx:key="{{item.themeId}}" id="{{index}}" class="weui-tab__content" hidden="{{activeIndex != index}}">
-          <template is="products" data="{{productData:item.productData}}"></template>
+        <view wx:for="{{themeData}}" wx:key="index" id="{{index}}" class="weui-tab__content" hidden="{{activeIndex != index}}">
+          <template is="products" data="{{productData:themeData[activeIndex].productList}}"></template>
         </view>
       </view>
     </view>

@@ -16,6 +16,12 @@ Page({
   _loadData: function () {
     my.getOrderListCount((data) => {
       console.log(data)
+      let wait = this.data.gridData[1]
+      wait.counts = data
+      console.log(this.data.gridData)
+      this.setData({
+        gridData: this.data.gridData
+      })
     });
     my.getUserInfo((data) => {
       this.setData({

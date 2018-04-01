@@ -10,7 +10,7 @@ Page({
     // 订单id
     orderId: null,
     // 订单状态
-    orderStatus: order.commonStatus,
+    orderStatus: 0,
     // 订单基本信息
     orderBaseInfo: null
   },
@@ -47,11 +47,11 @@ Page({
         console.log(data)
         this.setData({
           // products: data.products,// 获取真实商品数据
-          orderId: data.orderId,
+          orderId: data.id,
           orderStatus: data.orderStatus,
           orderBaseInfo: {
             createdDate: data.createdDate,
-            orderNo: data.orderNo
+            orderId: data.id
           }
         });
       })
@@ -88,13 +88,13 @@ Page({
     }
 
     let that = this;
-    //支付分两步，第一步是生成订单号，然后根据订单号支付
+    //支付分两步，第一步是生成，然后根据订单号支付
     order.doOrder(orderInfo, (data) => {
       console.log(data)
       //订单生成成功
-      if (data.isCanPay) {
+      if (data.isCanPay == 0) {
         //更新订单状态
-        let orderId = data.orderId;
+        let orderId = data.id;
         // that.data.orderNumber = orderNumber;
         // that.data.fromCartFlag = false;
         that.setData({

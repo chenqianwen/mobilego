@@ -5,23 +5,20 @@ var category = new Category()
 
 Page({
   data: {
-    // 选中的分类的序号
-    categorySelectedIndex: 0,
+    // 选中的分类的ID
+    categorySelectedId: 0,
     // 分类数据
     categoryData: [
       {
         id: 1,
-        index: 0,
         name: '小食'
       },
       {
         id: 2,
-        index: 1,
         name: '饮品'
       },
       {
         id: 3,
-        index: 2,
         name: '点心'
       },
       {
@@ -87,102 +84,104 @@ Page({
     ],
     // 某个分类的商品数据
     categoryProductsData: {
-      title: '小食',
-      topImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      procucts: [
+      categoryName: '小食',
+      categoryImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+      productList: [
         {
-          id: 1,
+          productId: 1,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡翅'
+          productName: '鸡翅'
         },
         {
-          id: 2,
+          productId: 2,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡胸'
+          productName: '鸡胸'
         },
         {
-          id: 3,
+          productId: 3,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡皮'
+          productName: '鸡皮'
         },
         {
-          id: 4,
+          productId: 4,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡嘴'
+          productName: '鸡嘴'
         },
         {
-          id: 5,
+          productId: 5,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡根'
+          productName: '鸡根'
         },
         {
-          id: 6,
+          productId: 6,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡毛'
+          productName: '鸡毛'
         },
         {
-          id: 7,
+          productId: 7,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡腿'
+          productName: '鸡腿'
         },
         {
-          id: 8,
+          productId: 8,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡里脊'
+          productName: '鸡里脊'
         },
         {
-          id: 9,
+          productId: 9,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡蛋'
+          productName: '鸡蛋'
         },
         {
-          id: 10,
+          productId: 10,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡骨肉'
+          productName: '鸡骨肉'
         },
         {
-          id: 11,
+          productId: 11,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡脆骨'
+          productName: '鸡脆骨'
         },
         {
-          id: 12,
+          productId: 12,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡软肋'
+          productName: '鸡软肋'
         },
         {
-          id: 13,
+          productId: 13,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡脚'
+          productName: '鸡脚'
         },
         {
-          id: 14,
+          productId: 14,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '翅尖'
+          productName: '翅尖'
         },
         {
-          id: 15,
+          productId: 15,
           productImgUrl: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          name: '鸡肚子'
+          productName: '鸡肚子'
         }
       ]
     }
 
   },
   onLoad: function () {
-    this.loadData()
+    this._loadData()
   },
   /**
    * 加载数据
    */
-  loadData: function () {
+  _loadData: function () {
     category.getCategory((data) => {
       this.setData({
         categoryData: data
       });
-      category.getProductsByCategory(data[0].id, (data) => {
+      let firstCategoryId = data[0].id;
+      category.getProductsByCategory(firstCategoryId, (data) => {
         this.setData({
-          categoryProductsData: data
+          categoryProductsData: data,
+          categorySelectedId: firstCategoryId
         })
       })
     })
@@ -192,12 +191,10 @@ Page({
    */
   switchCategory: function (e) {
     let id = category.getDataSet(e, 'id')
-    let index = category.getDataSet(e, 'index')
     this.setData({
-      categorySelectedIndex: index
+      categorySelectedId: id
     })
     category.getProductsByCategory(id, (data) => {
-      console.log(data)
       this.setData({
         categoryProductsData: data
       })
@@ -214,5 +211,5 @@ Page({
       url: '../product/product?id=' + id + '&name=' + name
     })
   },
-  
+
 })

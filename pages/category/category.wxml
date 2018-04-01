@@ -8,7 +8,7 @@
     <view class="left-box">
       <scroll-view data-id='21' scroll-y style="height: 100%;width:100%" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-top="0" enable-back-to-top>
         <block wx:for="{{categoryData}}" wx:key="{{item.id}}">
-          <view class="menu-item {{categorySelectedIndex==item.index?'selected':''}}" bindtap='switchCategory' data-id='{{item.id}}' data-index='{{item.index}}'> {{item.name}} </view>
+          <view class="menu-item {{categorySelectedId==item.id?'selected':''}}" bindtap='switchCategory' data-id='{{item.id}}'> {{item.name}} </view>
         </block>
       </scroll-view>
     </view>

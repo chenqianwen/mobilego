@@ -10,7 +10,7 @@ class Product extends Base {
    */
   getProductDetail(id, callback) {
     var params = {
-      url: '/product/detail/'+id,
+      url: '/product/wx/' + id + '/detail/',
       sCallback: function (data) {
         callback && callback(data);
       }
